@@ -15,9 +15,10 @@ public class GameGui extends JFrame {
     private JButton singleStepButton;
     private JPanel main;
     private JTextArea textArea1;
+    private JButton newButton;
     private GameArea gameArea;
-    private Thread runner;
-    private AutoRunner autoRunnter;
+    public Thread runner;
+    public AutoRunner autoRunnter;
 
     public GameGui() {
         setTitle("Simple example");
@@ -55,13 +56,22 @@ public class GameGui extends JFrame {
             }
         });
 
+        newButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NewGameDialog gameDialog = new NewGameDialog(this);
+                gameDialog.pack();
+                gameDialog.setVisible(true);
+
+            }
+        });
+
     }
 
     class AutoRunner implements Runnable {
 
         private final GameArea gameArea;
         private final JTextArea textArea1;
-        private int i = 0;
         private boolean isRunning = false;
 
         public AutoRunner(GameArea gameArea, JTextArea textArea1) {
@@ -73,9 +83,8 @@ public class GameGui extends JFrame {
         @Override
         public void run() {
             while (true) {
-                i++;
                 gameArea.performIteration();
-                textArea1.setText(gameArea.toString() + i);
+                textArea1.setText(gameArea.toString());
             }
         }
     }

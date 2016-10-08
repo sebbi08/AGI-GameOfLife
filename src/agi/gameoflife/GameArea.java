@@ -66,12 +66,14 @@ public class GameArea implements Area{
 
     @Override
     public void unSetPoint(Point2D point) {
-
+        matrix[(int)point.getX()][(int)point.getY()] = false;
     }
 
     @Override
     public void unSetPoint(List<Point2D> point) {
-
+        for(int i = 0; i < point.size(); i++){
+            unSetPoint(point.get(i));
+        }
     }
 
     @Override
