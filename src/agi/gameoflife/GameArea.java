@@ -93,7 +93,7 @@ public class GameArea implements Area{
 
     @Override
     public void setPoint(List<Point2D> point) {
-        for (int i = 0; i < this.breite && i < point.size(); i++) {
+        for (int i = 0; i < point.size(); i++) {
             setPoint(point.get(i));
         }
     }

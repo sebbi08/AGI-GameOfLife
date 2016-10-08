@@ -55,10 +55,4 @@ public class NewGameDialog extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        NewGameDialog dialog = new NewGameDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }

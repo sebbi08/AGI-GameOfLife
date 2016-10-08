@@ -62,7 +62,6 @@ public class GameGui extends JFrame {
                 NewGameDialog gameDialog = new NewGameDialog(this);
                 gameDialog.pack();
                 gameDialog.setVisible(true);
-
             }
         });
 
