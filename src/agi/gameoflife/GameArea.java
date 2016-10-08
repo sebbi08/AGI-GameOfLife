@@ -10,15 +10,18 @@ import java.util.List;
  */
 public class GameArea implements Area{
 
+    int breite, hoehe;
     private boolean [][]matrix;
-    Random rand = new Random();
+    private Random rand = new Random();
+    private List<Point2D> randomList = new ArrayList<>();
 
     public GameArea(int breite, int hoehe, boolean random, List<Point2D> liste){
+        this.breite = breite;
+        this.hoehe = hoehe;
         matrix = new boolean[breite][hoehe];
-
         // Felder werde zufällig befühlt
         if(random){
-            befuehleFelderRandom(breite, hoehe);
+            befuehleFelderRandom();
         }
         else
             befuehleFelderMitBenutzerEingaben(liste);
@@ -28,24 +31,36 @@ public class GameArea implements Area{
 
     }
 
-    private void befuehleFelderRandom(int breite, int hoehe) {
+    private void befuehleFelderRandom() {
 
-        List<Point2D> randomList = new ArrayList<>();
         Random anzahlFelder = new Random();
-        int felder = anzahlFelder.nextInt(breite*hoehe)+1;
+        int felder = anzahlFelder.nextInt(this.breite*this.hoehe)+1;
         int schleifenDurchlauf = felder;
         while (schleifenDurchlauf > 0 ) {
             //zufällige Punkt wird erstellt
-            Point2D randomPoint = new Point(rand.nextInt(felder) + 1,rand.nextInt(felder) + 1);
+            Point2D randomPoint = new Point(rand.nextInt(this.breite),rand.nextInt(this.hoehe));
             randomList.add(randomPoint);
             schleifenDurchlauf--;
+        }
+
+        //Matrize wird befühlt
+        Point2D temp;
+        for (int b = 0; b < this.breite; b++) {
+            for (int h = 0; h < this.hoehe; h++) {
+                temp = randomList.get(b*h);
+                if (b*h < randomList.size() && randomList.size() > 0){
+                    matrix[(int)temp.getX()][(int)temp.getY()] = true;
+                }
+                else
+                    matrix[(int)temp.getX()][(int)temp.getY()] = false;
+            }
         }
     }
 
 
     @Override
     public boolean[][] getMatix() {
-        return new boolean[0][];
+        return  matrix;
     }
 
     @Override
