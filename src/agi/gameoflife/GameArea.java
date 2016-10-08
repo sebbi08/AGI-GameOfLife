@@ -2,6 +2,7 @@ package agi.gameoflife;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.io.*;
 import java.util.*;
 import java.util.List;
 
@@ -38,7 +39,6 @@ public class GameArea implements Area{
     }
 
     private void befuehleFelderRandom() {
-
         Random anzahlFelder = new Random();
         int felder = anzahlFelder.nextInt(this.breite*this.hoehe)+1;
         int schleifenDurchlauf = felder;
@@ -49,7 +49,6 @@ public class GameArea implements Area{
             schleifenDurchlauf--;
         }
         befuellMatrize();
-
     }
 
     private void befuellMatrize() {
@@ -126,6 +125,58 @@ public class GameArea implements Area{
         unSetPoint(deleteList);
     }
 
+    @Override
+    public void saveGame() {
+
+        Writer fw = null;
+
+        try
+        {
+            fw = new FileWriter( "AktuellerStatus.txt" );
+            fw.write(toString(1));
+            fw.append( System.getProperty("line.separator") ); // e.g. "\n"
+        }
+        catch ( IOException ex ) {
+            System.err.println( "Konnte Datei nicht erstellen" );
+        }
+        finally {
+            if ( fw != null )
+                try { fw.close(); } catch ( IOException ex ) { ex.printStackTrace(); }
+        }
+    }
+
+    @Override
+    public void loadGame() {
+        String matrize;
+        File file = new File("AktuellerStatus.txt");
+        if (!file.canRead() || !file.isFile())
+            System.exit(0);
+
+        FileReader fr = null;
+        int c;
+        StringBuffer buff = new StringBuffer();
+        try {
+            fr = new FileReader(file);
+            while ((c = fr.read()) != -1) {
+                buff.append((char) c);
+            }
+            fr.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        matrize = buff.toString();
+        String [] arrayMatrize = new String[breite*hoehe];
+        arrayMatrize = matrize.split("\\s*[|]+");
+        int zaeler = 0;
+        for (int i = 0; i < this.breite; i++) {
+            for (int j = 0; j < this.hoehe; j++) {
+                    this.matrix[i][j] = Boolean.parseBoolean(arrayMatrize[zaeler+j]);
+            }
+            zaeler += 10;
+        }
+    }
+
     private int countNeighbours(Point2D point) {
         int x = (int) point.getX();
         int y = (int) point.getY();
@@ -158,6 +209,16 @@ public class GameArea implements Area{
                 returnValue += "||" +  (matrix[i][y] ? "1" : "0");
             }
             returnValue += "||\n";
+        }
+        return returnValue;
+    }
+
+    public String toString(int a ) {
+        String returnValue = "";
+        for (int i = 0; i < this.matrix.length; i++) {
+            for (int y = 0; y < this.matrix[i].length; y++) {
+                returnValue += this.matrix[i][y] + "|";
+            }
         }
         return returnValue;
     }

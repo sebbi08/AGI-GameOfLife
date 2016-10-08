@@ -19,4 +19,7 @@ public interface Area {
     void setPoint(List<Point2D> point); // Spielfeld befüllen mit einer Liste
 
     void performIteration(); // Schritt im Spiel
+
+    void saveGame();
+    void loadGame();
 }
