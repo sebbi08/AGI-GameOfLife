@@ -47,12 +47,13 @@ public class GameArea implements Area{
         Point2D temp;
         for (int b = 0; b < this.breite; b++) {
             for (int h = 0; h < this.hoehe; h++) {
-                temp = randomList.get(b*h);
+
                 if (b*h < randomList.size() && randomList.size() > 0){
+                    temp = randomList.get(b*h);
                     matrix[(int)temp.getX()][(int)temp.getY()] = true;
                 }
                 else
-                    matrix[(int)temp.getX()][(int)temp.getY()] = false;
+                    matrix[b][h] = false;
             }
         }
     }
