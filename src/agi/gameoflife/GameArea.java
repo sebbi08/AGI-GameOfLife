@@ -15,6 +15,7 @@ public class GameArea implements Area{
     private Random rand = new Random();
     private List<Point2D> randomList = new ArrayList<>();
 
+    //Konstruktor
     public GameArea(int breite, int hoehe, boolean random, List<Point2D> liste){
         this.breite = breite;
         this.hoehe = hoehe;
@@ -42,19 +43,28 @@ public class GameArea implements Area{
             randomList.add(randomPoint);
             schleifenDurchlauf--;
         }
+        befuellMatrize();
 
+    }
+
+    private void befuellMatrize() {
         //Matrize wird befühlt
         Point2D temp;
         for (int b = 0; b < this.breite; b++) {
-            for (int h = 0; h < this.hoehe; h++) {
+            fuelleSpalte(b);
+        }
+    }
 
-                if (b*h < randomList.size() && randomList.size() > 0){
-                    temp = randomList.get(b*h);
-                    matrix[(int)temp.getX()][(int)temp.getY()] = true;
-                }
-                else
-                    matrix[b][h] = false;
+    private void fuelleSpalte(int b) {
+        Point2D temp;
+        for (int h = 0; h < this.hoehe; h++) {
+
+            if (b*h < randomList.size() && randomList.size() > 0){
+                temp = randomList.get(b*h);
+                matrix[(int)temp.getX()][(int)temp.getY()] = true;
             }
+            else
+                matrix[b][h] = false;
         }
     }
 
@@ -77,13 +87,15 @@ public class GameArea implements Area{
     }
 
     @Override
-    public void setPoint(Point2D point) {
-
+    public void setPoint(Point2D point) { // 1,2;
+            matrix[(int)point.getX()][(int)point.getY()] = true;
     }
 
     @Override
     public void setPoint(List<Point2D> point) {
-
+        for (int i = 0; i < this.breite && i < point.size(); i++) {
+            setPoint(point.get(i));
+        }
     }
 
     @Override
