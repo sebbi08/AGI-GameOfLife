@@ -24,13 +24,13 @@ public class GameArea implements Area{
         this.breite = breite;
         this.hoehe = hoehe;
         matrix = new boolean[breite][hoehe];
+        randomList = new ArrayList<>();
         // Felder werde zufällig befühlt
         if(random){
             befuehleFelderRandom();
         }
-        else {
-            befuehleFelderMitBenutzerEingaben(liste);
-        }
+        else
+            setPoint(liste);
     }
 
     private void befuehleFelderMitBenutzerEingaben(List<Point2D> liste) {
@@ -153,7 +153,7 @@ public class GameArea implements Area{
     @Override
     public String toString() {
         String returnValue = "";
-        for (int i = 0; i < this.matrix.length; i++) {
+        for (int i = this.matrix.length-1; i > -1; i--) {
             for (int y = 0; y < this.matrix[i].length; y++) {
                 returnValue += "||" +  (matrix[i][y] ? "1" : "0");
             }

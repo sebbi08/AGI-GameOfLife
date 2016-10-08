@@ -56,10 +56,6 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="1b9dc" class="javax.swing.JTextField" binding="textField1" default-binding="true">
-            <constraints border-constraint="Center"/>
-            <properties/>
-          </component>
           <grid id="b72fc" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints border-constraint="North"/>
@@ -82,29 +78,14 @@
                   <text value="User Input"/>
                 </properties>
               </component>
-              <component id="3ae0c" class="javax.swing.JTextField" binding="heightTextField">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
               <component id="da32e" class="javax.swing.JRadioButton" binding="randomizedRadioButton" default-binding="true">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <selected value="true"/>
                   <text value="Randomized"/>
                 </properties>
-              </component>
-              <component id="6d5f" class="javax.swing.JTextField" binding="widthTextField">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties/>
               </component>
               <component id="70f49" class="javax.swing.JLabel">
                 <constraints>
@@ -114,8 +95,27 @@
                   <text value="Breite"/>
                 </properties>
               </component>
+              <component id="d9b18" class="javax.swing.JSpinner" binding="hightSpinner">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="595b2" class="javax.swing.JSpinner" binding="widthSpinner">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+              </component>
             </children>
           </grid>
+          <component id="82e2b" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <enabled value="false"/>
+              <text value="Disabled"/>
+            </properties>
+          </component>
         </children>
       </grid>
     </children>
