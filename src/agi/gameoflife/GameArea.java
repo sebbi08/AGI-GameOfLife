@@ -25,12 +25,9 @@ public class GameArea implements Area{
             befuehleFelderRandom();
         }
         else
-            befuehleFelderMitBenutzerEingaben(liste);
+            setPoint(liste);
     }
 
-    private void befuehleFelderMitBenutzerEingaben(List<Point2D> liste) {
-
-    }
 
     private void befuehleFelderRandom() {
 
