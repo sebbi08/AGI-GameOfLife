@@ -34,10 +34,6 @@ public class GameArea implements Area{
             setPoint(liste);
     }
 
-    private void befuehleFelderMitBenutzerEingaben(List<Point2D> liste) {
-
-    }
-
     private void befuehleFelderRandom() {
         Random anzahlFelder = new Random();
         int felder = anzahlFelder.nextInt(this.breite*this.hoehe)+1;
@@ -110,13 +106,13 @@ public class GameArea implements Area{
         for (int i = 0; i < this.matrix.length; i++) {
             for (int y = 0; y < this.matrix[i].length; y++) {
                 int neighbours = countNeighbours(new Point(i,y));
-                Point curentPoint = new Point(i,y);
+                Point currentPoint = new Point(i,y);
                 if(neighbours < 2){
-                    deleteList.add(curentPoint);
+                    deleteList.add(currentPoint);
                 }else if(neighbours == 3){
-                    setList.add(curentPoint);
+                    setList.add(currentPoint);
                 }else if(neighbours > 3){
-                    deleteList.add(curentPoint);
+                    deleteList.add(currentPoint);
                 }
             }
         }
@@ -206,9 +202,9 @@ public class GameArea implements Area{
         String returnValue = "";
         for (int i = this.matrix.length-1; i > -1; i--) {
             for (int y = 0; y < this.matrix[i].length; y++) {
-                returnValue += "||" +  (matrix[i][y] ? "1" : "0");
+                returnValue += "|" +  (matrix[i][y] ? "X" : "O");
             }
-            returnValue += "||\n";
+            returnValue += "|\n";
         }
         return returnValue;
     }

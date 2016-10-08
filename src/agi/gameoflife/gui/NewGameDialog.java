@@ -19,10 +19,12 @@ public class NewGameDialog extends JDialog {
     private JSpinner hightSpinner;
     private JSpinner widthSpinner;
     private JTextArea textArea1;
-    private GameArea gameArea;
+    private Integer width;
+    private Integer height;
+    private boolean random;
+    private List<Point2D> list;
 
-    public NewGameDialog(GameArea gameArea) {
-        this.gameArea = gameArea;
+    public NewGameDialog() {
         setSize(500,500);
         setContentPane(contentPane);
         setModal(true);
@@ -69,7 +71,10 @@ public class NewGameDialog extends JDialog {
 
     private void onOK() {
         if(randomizedRadioButton.isSelected()){
-            gameArea.create((Integer) hightSpinner.getValue(),(Integer) widthSpinner.getValue(),true,new ArrayList<>());
+            this.width = (Integer) hightSpinner.getValue();
+            this.height = (Integer) widthSpinner.getValue();
+            this.random = true;
+            this.list = new ArrayList<>();
         }else{
             String valuePairs = textArea1.getText();
             List<Point2D> list = new ArrayList<>();
@@ -96,8 +101,10 @@ public class NewGameDialog extends JDialog {
                 JOptionPane.showMessageDialog(this, "Flasche formatirung der werte paare x,y mit einer leerzeile getrennt");
                 return;
             }
-
-            gameArea.create((Integer) hightSpinner.getValue(),(Integer) widthSpinner.getValue(),false,list);
+            this.width = (Integer) hightSpinner.getValue();
+            this.height = (Integer) widthSpinner.getValue();
+            this.random = false;
+            this.list = list;
         }
         // add your code here
         dispose();
@@ -106,5 +113,21 @@ public class NewGameDialog extends JDialog {
     private void onCancel() {
         // add your code here if necessary
         dispose();
+    }
+
+    public Integer getNewWidth() {
+        return width;
+    }
+
+    public Integer getNewHeight() {
+        return height;
+    }
+
+    public boolean isRandom() {
+        return random;
+    }
+
+    public List<Point2D> getList() {
+        return list;
     }
 }
