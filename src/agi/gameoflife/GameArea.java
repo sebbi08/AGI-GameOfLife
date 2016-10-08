@@ -27,8 +27,6 @@ public class GameArea implements Area{
         }
         else
             setPoint(liste);
-        saveGame();
-        loadGame();
     }
 
 
