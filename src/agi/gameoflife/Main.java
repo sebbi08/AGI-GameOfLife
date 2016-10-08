@@ -6,5 +6,6 @@ public class Main {
 
         System.out.println("HALLO WELT!!!!");
         System.out.println("HALLO von Peter!!!!");
+        System.out.println("HALLO von Scharon");
     }
 }
