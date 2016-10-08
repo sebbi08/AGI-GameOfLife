@@ -70,7 +70,25 @@ public class GameArea implements Area{
 
     @Override
     public void performIteration() {
+        List<Point2D> deleteList = new ArrayList<>();
+        List<Point2D> setList = new ArrayList<>();
 
+        for (int i = 0; i < this.matrix.length; i++) {
+            for (int y = 0; y < this.matrix[i].length; y++) {
+                int neighbours = countNeighbours(new Point(i,y));
+                Point curentPoint = new Point(i,y);
+                if(neighbours < 2){
+                    deleteList.add(curentPoint);
+                }else if(neighbours == 3){
+                    setList.add(curentPoint);
+                }else if(neighbours > 3){
+                    deleteList.add(curentPoint);
+                }
+            }
+        }
+
+        setPoint(setList);
+        unSetPoint(deleteList);
     }
 
     private int countNeighbours(Point2D point) {
@@ -81,6 +99,11 @@ public class GameArea implements Area{
             for (int j = -1; j <= 1; j++) {
                 int curX = x + i;
                 int curY = x + j;
+
+                if(curX == -1) curX = matrix.length -1;
+                if(curY == -1) curY = matrix[curX].length -1;
+                if(curX >= matrix.length) curX = 0;
+                if(curY >= matrix[curX].length) curY = 0;
 
                 if (!(i == 0 && j == 0)) {
                     if (matrix[curX][curY]) {
@@ -97,7 +120,7 @@ public class GameArea implements Area{
         String returnValue = "";
         for (int i = 0; i < this.matrix.length; i++) {
             for (int y = 0; y < this.matrix[i].length; y++) {
-                returnValue += matrix[i][y] ? "1" : "0";
+                returnValue += (matrix[i][y] ? "1" : "0") + (y < this.matrix[i].length-1 ? "||" : "");
             }
             returnValue += "\n";
         }
