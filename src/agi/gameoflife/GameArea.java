@@ -17,6 +17,10 @@ public class GameArea implements Area{
 
     //Konstruktor
     public GameArea(int breite, int hoehe, boolean random, List<Point2D> liste){
+        create(breite,hoehe,random,liste);
+    }
+
+    public void create(int breite, int hoehe, boolean random, List<Point2D> liste){
         this.breite = breite;
         this.hoehe = hoehe;
         matrix = new boolean[breite][hoehe];
@@ -24,8 +28,9 @@ public class GameArea implements Area{
         if(random){
             befuehleFelderRandom();
         }
-        else
+        else {
             befuehleFelderMitBenutzerEingaben(liste);
+        }
     }
 
     private void befuehleFelderMitBenutzerEingaben(List<Point2D> liste) {
@@ -128,11 +133,11 @@ public class GameArea implements Area{
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 int curX = x + i;
-                int curY = x + j;
+                int curY = y + j;
 
                 if(curX == -1) curX = matrix.length -1;
-                if(curY == -1) curY = matrix[curX].length -1;
                 if(curX >= matrix.length) curX = 0;
+                if(curY == -1) curY = matrix[curX].length -1;
                 if(curY >= matrix[curX].length) curY = 0;
 
                 if (!(i == 0 && j == 0)) {
@@ -150,9 +155,9 @@ public class GameArea implements Area{
         String returnValue = "";
         for (int i = 0; i < this.matrix.length; i++) {
             for (int y = 0; y < this.matrix[i].length; y++) {
-                returnValue += (matrix[i][y] ? "1" : "0") + (y < this.matrix[i].length-1 ? "||" : "");
+                returnValue += "||" +  (matrix[i][y] ? "1" : "0");
             }
-            returnValue += "\n";
+            returnValue += "||\n";
         }
         return returnValue;
     }

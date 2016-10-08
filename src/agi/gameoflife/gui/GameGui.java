@@ -15,7 +15,7 @@ public class GameGui extends JFrame {
     private JButton singleStepButton;
     private JPanel main;
     private JTextArea textArea1;
-    private JButton newButton;
+    private JButton reload;
     private GameArea gameArea;
     public Thread runner;
     public AutoRunner autoRunnter;
@@ -27,7 +27,7 @@ public class GameGui extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         add(main);
 
-        gameArea = new GameArea(10, 10, true, new ArrayList<>());
+        gameArea = new GameArea(4, 4, true, new ArrayList<>());
         autoRunnter = new AutoRunner(gameArea, textArea1);
 
         textArea1.setText(gameArea.toString());
@@ -56,12 +56,14 @@ public class GameGui extends JFrame {
             }
         });
 
-        newButton.addActionListener(new AbstractAction() {
+        reload.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                NewGameDialog gameDialog = new NewGameDialog(this);
-                gameDialog.pack();
-                gameDialog.setVisible(true);
+
+                NewGameDialog dialog = new NewGameDialog(gameArea);
+                dialog.pack();
+                dialog.setVisible(true);
+                System.exit(0);
             }
         });
 
